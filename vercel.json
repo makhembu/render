@@ -1,16 +1,15 @@
 {
-  "name": "puppeteer-server",
-  "version": "1.0.0",
-  "main": "api/render.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "chrome-aws-lambda": "^10.1.0",
-    "puppeteer-core": "^10.4.0"
-  }
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/render.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/render",
+      "dest": "/api/render.js"
+    }
+  ]
 }
