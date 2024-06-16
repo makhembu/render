@@ -1,13 +1,23 @@
-const puppeteer = require('puppeteer-core');
-const chromium = require('chrome-aws-lambda');
+const express = require('express');
+const puppeteer = require('puppeteer');
 
-module.exports = async (req, res) => {
-  let browser = null;
+const app = express();
+
+app.get('/api/render', async (req, res) => {
+  let browser;
   try {
     browser = await puppeteer.launch({
-      args: chromium.args,
-      executablePath: await chromium.executablePath,
-      headless: chromium.headless,
+      args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage',
+        '--disable-accelerated-2d-canvas',
+        '--no-first-run',
+        '--no-zygote',
+        '--single-process',
+        '--disable-gpu'
+      ],
+      headless: true
     });
 
     const page = await browser.newPage();
@@ -21,6 +31,9 @@ module.exports = async (req, res) => {
     if (browser) {
       await browser.close();
     }
+    console.error('Error rendering page:', error);
     res.status(500).send('Error rendering page');
   }
-};
+});
+
+module.exports = app;
