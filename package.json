@@ -1,4 +1,14 @@
 {
+  "name": "puppeteer-server",
+  "version": "1.0.0",
+  "main": "api/render.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
   "dependencies": {
     "puppeteer": "^22.11.0"
   }
